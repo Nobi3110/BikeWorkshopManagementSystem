@@ -1,4 +1,11 @@
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.*;
+import org.junit.jupiter.api.Test;
+
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BikeWorkshopManagementTest {
@@ -113,5 +120,56 @@ class BikeWorkshopManagementTest {
             fail("Total cost cannot be negative");
         }
     }
-    
+
+    @ParameterizedTest
+    @ValueSource(strings = {"Brake Pads", "Tires", "Chain", "Lubricant"})
+    void testAddToCartWithValueSource(String part) {
+        Cart.getCart().clear();
+        Cart.getCart().add(part);
+        assertTrue(Cart.getCart().contains(part));
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "Brake Pads, 880.0",
+            "Tires, 3550.0",
+            "Chain, 4850.0",
+            "Lubricant, 1890.0"
+    })
+    void testAddToCartWithPrice(String part, double price) {
+        Cart.getCart().clear();
+        Cart.getCart().add(part);
+        Cart.setTotalCost(price);
+        assertEquals(price, Cart.getTotalCost());
+        assertTrue(Cart.getCart().contains(part));
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/info.csv", numLinesToSkip = 0)
+    void testAddToCartWithCsvFile(String part, double price) {
+        Cart.getCart().clear();
+        Cart.getCart().add(part);
+        Cart.setTotalCost(price);
+        assertEquals(price, Cart.getTotalCost());
+    }
+
+    static Stream<Arguments> providePartsAndPrices() {
+        return Stream.of(
+                Arguments.of("Brake Pads", 880.0),
+                Arguments.of("Tires", 3550.0),
+                Arguments.of("Chain", 4850.0),
+                Arguments.of("Lubricant", 1890.0)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("providePartsAndPrices")
+    void testAddToCartWithMethodSource(String part, double price) {
+        Cart.getCart().clear();
+        Cart.getCart().add(part);
+        Cart.setTotalCost(price);
+        assertEquals(price, Cart.getTotalCost());
+    }
 }
+
+
