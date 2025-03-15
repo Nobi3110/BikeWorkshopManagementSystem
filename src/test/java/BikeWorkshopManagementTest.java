@@ -73,4 +73,9 @@ class BikeWorkshopManagementTest {
         });
     }
 
+    @Test
+    void testCartNotNull() {
+        assertNotNull(Cart.getCart());
+    }
+
 }
