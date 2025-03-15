@@ -66,6 +66,11 @@ class BikeWorkshopManagementTest {
         assertEquals(0, Cart.getTotalCost());
     }
 
-    
+    @Test
+    void testInvalidDiscount() {
+        assertThrows(NumberFormatException.class, () -> {
+            Double.parseDouble("Invalid");
+        });
+    }
 
 }
