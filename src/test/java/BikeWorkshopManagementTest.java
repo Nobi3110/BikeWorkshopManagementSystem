@@ -85,9 +85,21 @@ class BikeWorkshopManagementTest {
 
     @Test
     void testCartArray() {
-        String[] actualedCart = {"Wheel Alignment", "Master Service"};
-        String[] expectedCart = {"Wheel Alignment", "Master Service"};
-        assertArrayEquals(actualedCart, expectedCart);
+        Cart.getCart().add("Brake Pads");
+        Cart.getCart().add("Oil Change");
+
+        String[] expectedCart = {"Brake Pads", "Oil Change"};
+        assertArrayEquals(expectedCart, Cart.getCart().toArray());
     }
+
+
+    @Test
+    void testCartLinesMatch() {
+        Cart.getCart().add("Brake Pads");
+        String expectedLine = "Brake Pads";
+        assertLinesMatch(Cart.getCart(), java.util.List.of(expectedLine));
+    }
+
+
 
 }
