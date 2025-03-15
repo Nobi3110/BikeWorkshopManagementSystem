@@ -100,6 +100,14 @@ class BikeWorkshopManagementTest {
         assertLinesMatch(Cart.getCart(), java.util.List.of(expectedLine));
     }
 
+    @Test
+    void testCartTimeout() {
+        assertTimeout(java.time.Duration.ofMillis(100), () -> {
+            Cart.getCart().add("Oil Change");
+        });
+    }
+
+
 
 
 }
