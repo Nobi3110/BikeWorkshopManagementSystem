@@ -54,4 +54,16 @@ class BikeWorkshopManagementTest {
         assertNotSame(3500.0, discountedTotal);
     }
 
+    @Test
+    void testCheckout() {
+        Cart.getCart().add("Wheel Alignment");
+        Cart.setTotalCost(250.0);
+        assertDoesNotThrow(() -> {
+            Cart.getCart().clear();
+            Cart.setTotalCost(0);
+        });
+        assertTrue(Cart.getCart().isEmpty());
+        assertEquals(0, Cart.getTotalCost());
+    }
+
 }
