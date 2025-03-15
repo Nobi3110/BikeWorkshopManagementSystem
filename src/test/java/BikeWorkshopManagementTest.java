@@ -78,4 +78,9 @@ class BikeWorkshopManagementTest {
         assertNotNull(Cart.getCart());
     }
 
+    @Test
+    void testSameCartInstance() {
+        assertSame(Cart.getCart(), Cart.getCart());
+    }
+
 }
