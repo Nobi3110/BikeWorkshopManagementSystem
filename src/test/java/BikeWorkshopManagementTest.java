@@ -107,7 +107,11 @@ class BikeWorkshopManagementTest {
         });
     }
 
-
-
-
+    @Test
+    void testFailCondition() {
+        if (Cart.getTotalCost() < 0) {
+            fail("Total cost cannot be negative");
+        }
+    }
+    
 }
