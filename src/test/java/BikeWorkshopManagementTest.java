@@ -34,4 +34,14 @@ class BikeWorkshopManagementTest {
         assertNotEquals(0, Cart.getTotalCost());
     }
 
+    @Test
+    void testClearCart() {
+        Cart.getCart().add("Tires");
+        Cart.setTotalCost(3550.0);
+        Cart.getCart().clear();
+        Cart.setTotalCost(0);
+        assertTrue(Cart.getCart().isEmpty());
+        assertEquals(0, Cart.getTotalCost());
+    }
+
 }
