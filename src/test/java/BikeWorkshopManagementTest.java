@@ -44,4 +44,14 @@ class BikeWorkshopManagementTest {
         assertEquals(0, Cart.getTotalCost());
     }
 
+    @Test
+    void testApplyDiscount() {
+        Cart.getCart().add("Master Service");
+        Cart.setTotalCost(3500.0);
+        double discount = Cart.getTotalCost() * 0.1;
+        double discountedTotal = Cart.getTotalCost() - discount;
+        assertEquals(3150.0, discountedTotal);
+        assertNotSame(3500.0, discountedTotal);
+    }
+
 }
