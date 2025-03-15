@@ -83,4 +83,11 @@ class BikeWorkshopManagementTest {
         assertSame(Cart.getCart(), Cart.getCart());
     }
 
+    @Test
+    void testCartArray() {
+        String[] actualedCart = {"Wheel Alignment", "Master Service"};
+        String[] expectedCart = {"Wheel Alignment", "Master Service"};
+        assertArrayEquals(actualedCart, expectedCart);
+    }
+
 }
